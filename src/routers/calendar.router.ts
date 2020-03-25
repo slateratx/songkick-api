@@ -31,7 +31,7 @@ export class CalendarRouter {
       });
     });
 
-    router.post('/weekly/shows', async (req: Request, res: Response, next: NextFunction) => {
+    router.post('/shows/range', async (req: Request, res: Response, next: NextFunction) => {
       const metroId = req.body.metroId;
       const minDate = req.body.minDate;
       const maxDate = req.body.maxDate;
