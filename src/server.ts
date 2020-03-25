@@ -1,0 +1,28 @@
+import * as express from 'express';
+import { Request, Response, Application, NextFunction } from 'express';
+import { corsMiddleware } from './utils';
+import { LocationRouter } from './routers/location.router';
+
+process.on('uncaughtException', (err: Error) => {
+  console.log(err);
+  throw err;
+});
+
+// const SONGKICK_KEY = process.env.SONGKICK_KEY;
+const SONGKICK_KEY = '5vCRPKKglri6fMpu';
+if (!SONGKICK_KEY) { throw new Error('Required Env Var SONGKICK_KEY not found.'); }
+
+const app: Application = express();
+app.use(corsMiddleware);
+app.use(express.json());
+app.use(function (err: any, req: Request, res: Response, next: NextFunction) {
+  res.sendStatus(500);
+});
+
+// const intentRouter = new LocationRouter(dfKey, dfEmail, new FulfillmentResolver());
+const locationRouter = new LocationRouter(SONGKICK_KEY);
+app.use('/location', locationRouter.router);
+
+
+app.listen(process.env.PORT || 3000);
+console.log("Listening on port 3000");
