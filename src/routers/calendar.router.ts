@@ -30,5 +30,20 @@ export class CalendarRouter {
         console.log(error);
       });
     });
+
+    router.post('/weekly/shows', async (req: Request, res: Response, next: NextFunction) => {
+      const metroId = req.body.metroId;
+      const calendarURL = `https://api.songkick.com/api/3.0/metro_areas/${metroId}/calendar.json?apikey=${this.songkick_key}&min_date=2009-09-07&max_date=2009-09-13`;
+    
+      axios.get(calendarURL)
+      .then((response) => {
+        const results = response.data.resultsPage.results;
+
+        res.json(results);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    });
   }
 }
