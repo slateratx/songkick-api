@@ -1,4 +1,4 @@
-#Twilio API
+#Songkick API
 
 ### Prerequisites
 Before beginning, make sure you have Typescript 2 installed globally. `npm install -g typescript@2.0`.  
