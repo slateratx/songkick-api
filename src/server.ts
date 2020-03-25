@@ -8,8 +8,7 @@ process.on('uncaughtException', (err: Error) => {
   throw err;
 });
 
-// const SONGKICK_KEY = process.env.SONGKICK_KEY;
-const SONGKICK_KEY = '5vCRPKKglri6fMpu';
+const SONGKICK_KEY = process.env.SONGKICK_KEY;
 if (!SONGKICK_KEY) { throw new Error('Required Env Var SONGKICK_KEY not found.'); }
 
 const app: Application = express();
@@ -19,7 +18,6 @@ app.use(function (err: any, req: Request, res: Response, next: NextFunction) {
   res.sendStatus(500);
 });
 
-// const intentRouter = new LocationRouter(dfKey, dfEmail, new FulfillmentResolver());
 const locationRouter = new LocationRouter(SONGKICK_KEY);
 app.use('/location', locationRouter.router);
 
