@@ -16,7 +16,7 @@ export class CalendarRouter {
 
   private mountRoutes(router: Router): void {
 
-    router.post('/calendar', async (req: Request, res: Response, next: NextFunction) => {
+    router.post('/shows', async (req: Request, res: Response, next: NextFunction) => {
       const metroId = req.body.metroId;
       const calendarURL = `https://api.songkick.com/api/3.0/metro_areas/${metroId}/calendar.json?apikey=${this.songkick_key}`;
     
