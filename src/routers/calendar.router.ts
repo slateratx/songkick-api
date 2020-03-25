@@ -7,7 +7,9 @@ export class CalendarRouter {
   
   public router: Router;
 
-  constructor() {
+  constructor(
+    private songkick_key: string 
+  ) {
     this.router = Router();
     this.mountRoutes(this.router)
   }
@@ -15,7 +17,8 @@ export class CalendarRouter {
   private mountRoutes(router: Router): void {
 
     router.post('/calendar', async (req: Request, res: Response, next: NextFunction) => {
-      const calendarURL = 'https://api.songkick.com/api/3.0/metro_areas/9179/calendar.json?apikey=5vCRPKKglri6fMpu'
+      const metroId = req.body.metroId;
+      const calendarURL = `https://api.songkick.com/api/3.0/metro_areas/${metroId}/calendar.json?apikey=${this.songkick_key}`;
     
       axios.get(calendarURL)
       .then((response) => {

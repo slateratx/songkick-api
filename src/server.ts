@@ -1,6 +1,7 @@
 import * as express from 'express';
 import { Request, Response, Application, NextFunction } from 'express';
 import { corsMiddleware } from './utils';
+import { CalendarRouter } from './routers/calendar.router';
 import { LocationRouter } from './routers/location.router';
 
 process.on('uncaughtException', (err: Error) => {
@@ -20,6 +21,9 @@ app.use(function (err: any, req: Request, res: Response, next: NextFunction) {
 
 const locationRouter = new LocationRouter(SONGKICK_KEY);
 app.use('/location', locationRouter.router);
+
+const calendarRouter = new CalendarRouter(SONGKICK_KEY);
+app.use('/calendar', calendarRouter.router);
 
 
 app.listen(process.env.PORT || 3000);
